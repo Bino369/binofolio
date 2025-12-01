@@ -1,10 +1,10 @@
 import React from 'react';
-import { Instagram, Phone, Github } from 'lucide-react';
+import { Instagram, Phone, Github, Mail } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-24 bg-gradient-to-b from-transparent to-purple-900/10">
-      <div className="container mx-auto px-6 max-w-6xl text-center">
+      <div className="container mx-auto px-6 max-w-7xl text-center">
         <h2 className="text-5xl md:text-7xl font-display font-bold mb-8">
           Let's Create <span className="text-stroke-white text-transparent italic">Chaos</span> Together.
         </h2>
@@ -12,7 +12,7 @@ const Contact: React.FC = () => {
           Got a project? A photo idea? Or just want to send memes? I'm down.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {/* Instagram Card */}
             <a 
                 href="https://instagram.com/binooyyyyyy" 
@@ -42,6 +42,20 @@ const Contact: React.FC = () => {
                 <div>
                     <h3 className="text-2xl font-bold">GitHub</h3>
                     <p className="text-gray-400">@bino369</p>
+                </div>
+            </a>
+
+            {/* Email Card */}
+            <a 
+                href="mailto:binoyanil85@gmail.com" 
+                className="glass-panel p-8 rounded-3xl flex flex-col items-center gap-4 hover:bg-white/5 transition-colors group"
+            >
+                <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Mail size={32} className="text-white" />
+                </div>
+                <div>
+                    <h3 className="text-2xl font-bold">Email</h3>
+                    <p className="text-gray-400 text-sm">binoyanil85@gmail.com</p>
                 </div>
             </a>
 

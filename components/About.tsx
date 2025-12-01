@@ -17,10 +17,11 @@ const About: React.FC = () => {
           >
             <div className="aspect-square rounded-3xl overflow-hidden relative z-10 border border-white/10 shadow-2xl shadow-purple-500/20 group">
              <img 
-  src="https://lh3.googleusercontent.com/d/1PB0e6o4oi2Oc4EUYgo6fkjYusavbpGj-" 
-  alt="Binoy's Vibe" 
-  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-/>
+              src="https://drive.google.com/thumbnail?id=1PB0e6o4oi2Oc4EUYgo6fkjYusavbpGj-&sz=w1000" 
+              alt="Binoy's Vibe" 
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
                 <div className="text-white">

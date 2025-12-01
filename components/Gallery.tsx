@@ -4,14 +4,14 @@ import { motion } from 'framer-motion';
 import { Camera } from 'lucide-react';
 
 const photos: Photo[] = [
-  { id: 1, url: "https://lh3.googleusercontent.com/d/1gLc9Xfy9rv12RQAhyHvcY2VVsJB9RNKR", caption: "Perspective", span: "md:col-span-2 md:row-span-2" },
-  { id: 2, url: "https://lh3.googleusercontent.com/d/1mLtvEIwuSaaJkKwHqjAbteHVICnuDRdY", caption: "Vibe Check", span: "md:col-span-1 md:row-span-2" },
-  { id: 3, url: "https://lh3.googleusercontent.com/d/1gudBTciUGuL8Ku2ZYvZjT_6YdkhRPSzJ", caption: "Frames", span: "" },
-  { id: 5, url: "https://lh3.googleusercontent.com/d/1EPgFpKiPPgUBe3aaT0Dh_6GH6_EM0_Jn", caption: "Focus", span: "md:col-span-2" },
-  { id: 6, url: "https://lh3.googleusercontent.com/d/15_J7ayQu18JaOCeKHdjUnwyV0e9UAgWE", caption: "Shadows", span: "md:col-span-2" },
-  { id: 7, url: "https://lh3.googleusercontent.com/d/1liXNOmh3A3_NgNZ-QSmltulmKseSTXgP", caption: "Light", span: "" },
-  { id: 8, url: "https://lh3.googleusercontent.com/d/11Q6_zLJDcXY6oLW2Lb-VeP-faIN7l8mh", caption: "Contrast", span: "md:col-span-2 md:row-span-2" },
-  { id: 10, url: "https://lh3.googleusercontent.com/d/1SN8_vsWxQBcBUsqGxHQcTCA1mlgx2kNw", caption: "Mood", span: "md:row-span-2" },
+  { id: 1, url: "https://drive.google.com/thumbnail?id=1gLc9Xfy9rv12RQAhyHvcY2VVsJB9RNKR&sz=w1000", caption: "Perspective", span: "md:col-span-2 md:row-span-2" },
+  { id: 2, url: "https://drive.google.com/thumbnail?id=1mLtvEIwuSaaJkKwHqjAbteHVICnuDRdY&sz=w1000", caption: "Vibe Check", span: "md:col-span-1 md:row-span-2" },
+  { id: 3, url: "https://drive.google.com/thumbnail?id=1gudBTciUGuL8Ku2ZYvZjT_6YdkhRPSzJ&sz=w1000", caption: "Frames", span: "" },
+  { id: 5, url: "https://drive.google.com/thumbnail?id=1EPgFpKiPPgUBe3aaT0Dh_6GH6_EM0_Jn&sz=w1000", caption: "Focus", span: "md:col-span-2" },
+  { id: 6, url: "https://drive.google.com/thumbnail?id=11Q6_zLJDcXY6oLW2Lb-VeP-faIN7l8mh&sz=w1000", caption: "Contrast", span: "md:col-span-2" }, // Swapped position for layout balance
+  { id: 7, url: "https://drive.google.com/thumbnail?id=1liXNOmh3A3_NgNZ-QSmltulmKseSTXgP&sz=w1000", caption: "Light", span: "" },
+  { id: 8, url: "https://drive.google.com/thumbnail?id=15_J7ayQu18JaOCeKHdjUnwyV0e9UAgWE&sz=w1000", caption: "Shadows", span: "md:col-span-2 md:row-span-2" }, // Swapped position
+  { id: 10, url: "https://drive.google.com/thumbnail?id=1SN8_vsWxQBcBUsqGxHQcTCA1mlgx2kNw&sz=w1000", caption: "Mood", span: "md:row-span-2" },
 ];
 
 const Gallery: React.FC = () => {
@@ -44,6 +44,7 @@ const Gallery: React.FC = () => {
               <img 
                 src={photo.url} 
                 alt={photo.caption}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
               />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
