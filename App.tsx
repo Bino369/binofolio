@@ -5,7 +5,6 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Gallery from './components/Gallery';
-import Unsplash from './components/Unsplash';
 import Contact from './components/Contact';
 
 const App: React.FC = () => {
@@ -25,7 +24,6 @@ const App: React.FC = () => {
         <Skills />
         <Projects />
         <Gallery />
-        <Unsplash />
         <Contact />
       </main>
     </div>

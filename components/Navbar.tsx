@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     { name: 'Skills', href: '#skills' },
     { name: 'Work', href: '#projects' },
     { name: 'Shots', href: '#gallery' },
-    { name: 'Unsplash ⚡', href: '#unsplash' },
+    { name: 'Unsplash', href: 'https://unsplash.com/@binoy369', external: true },
     { name: 'Hit Me Up', href: '#contact' },
   ];
 
@@ -42,6 +42,8 @@ const Navbar: React.FC = () => {
               <a 
                 key={link.name} 
                 href={link.href} 
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
                 className="text-sm font-medium text-gray-400 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all"
               >
                 {link.name}
@@ -72,6 +74,8 @@ const Navbar: React.FC = () => {
               <a 
                 key={link.name} 
                 href={link.href} 
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
                 className="text-lg font-medium text-gray-200 py-2 w-full text-center hover:bg-white/10 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
               >

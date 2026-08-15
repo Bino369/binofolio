@@ -21,23 +21,3 @@ export interface Skill {
   icon: React.ElementType;
   category: 'code' | 'creative' | 'tools';
 }
-
-export interface UnsplashPhoto {
-  id: string;
-  title: string;
-  url: string;
-  downloadUrl: string;
-  unsplashUrl: string;
-  category: 'cyber' | 'minimal' | 'mood' | 'urban' | 'wallpaper';
-  views: string;
-  downloads: string;
-  likes: number;
-  camera: string;
-  focal: string;
-  aperture: string;
-  iso: string;
-  colors: string[];
-  tags: string[];
-  sticker?: string;
-  featured?: boolean;
-}
