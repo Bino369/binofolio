@@ -56,9 +56,13 @@ const Gallery: React.FC = () => {
           ))}
         </div>
         
-        <div className="text-center mt-12">
-            <a href="https://instagram.com/binooyyyyyy" target="_blank" rel="noreferrer" className="inline-block text-gray-400 hover:text-white underline underline-offset-4 decoration-purple-500 hover:decoration-2 transition-all">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12">
+            <a href="https://instagram.com/binooyyyyyy" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white underline underline-offset-4 decoration-purple-500 hover:decoration-2 transition-all">
                 See more on Insta →
+            </a>
+            <span className="hidden sm:inline text-gray-600">•</span>
+            <a href="https://unsplash.com/@binoy369" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white underline underline-offset-4 decoration-pink-500 hover:decoration-2 transition-all flex items-center gap-1 font-medium">
+                High-res shots on Unsplash 📸 →
             </a>
         </div>
       </div>
