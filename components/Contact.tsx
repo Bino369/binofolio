@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Phone, Github, Mail } from 'lucide-react';
+import { Instagram, Phone, Github, Mail, Camera } from 'lucide-react';
 
 const Contact: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const Contact: React.FC = () => {
           Got a project? A photo idea? Or just want to send memes? I'm down.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
             {/* Instagram Card */}
             <a 
                 href="https://instagram.com/binooyyyyyy" 
@@ -26,6 +26,22 @@ const Contact: React.FC = () => {
                 <div>
                     <h3 className="text-2xl font-bold">Instagram</h3>
                     <p className="text-gray-400">@binooyyyyyy</p>
+                </div>
+            </a>
+
+            {/* Unsplash Card */}
+            <a 
+                href="https://unsplash.com/@binoy369" 
+                target="_blank" 
+                rel="noreferrer"
+                className="glass-panel p-8 rounded-3xl flex flex-col items-center gap-4 hover:bg-white/5 transition-colors group"
+            >
+                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-pink-500/20">
+                    <Camera size={32} className="text-white" />
+                </div>
+                <div>
+                    <h3 className="text-2xl font-bold">Unsplash</h3>
+                    <p className="text-gray-400">@binoy369</p>
                 </div>
             </a>
 
