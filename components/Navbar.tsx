@@ -24,13 +24,18 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4' : 'py-6'}`}>
+    <motion.nav 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-4' : 'py-6'}`}
+    >
       <div className="container mx-auto px-6 flex justify-center">
         <div className={`glass-panel rounded-full px-6 py-3 flex items-center justify-between w-full max-w-3xl transition-all duration-300 ${isScrolled ? 'bg-black/60 border-white/10 shadow-lg shadow-purple-500/10' : 'bg-transparent border-transparent'}`}>
           
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
-            <div className="bg-white text-black p-1 rounded-md group-hover:rotate-12 transition-transform">
+            <div className="bg-white text-black p-1 rounded-md group-hover:rotate-12 transition-transform duration-300">
               <Terminal size={18} strokeWidth={3} />
             </div>
             <span className="font-display font-bold text-lg tracking-tight">binoy<span className="text-purple-500">.dev</span></span>
@@ -44,7 +49,7 @@ const Navbar: React.FC = () => {
                 href={link.href} 
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noreferrer" : undefined}
-                className="text-sm font-medium text-gray-400 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all"
+                className="text-sm font-medium text-gray-400 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all duration-200"
               >
                 {link.name}
               </a>
@@ -53,8 +58,9 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Toggle */}
           <button 
-            className="md:hidden text-white"
+            className="md:hidden text-white p-1 hover:opacity-80 transition-opacity"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle navigation menu"
           >
             {isOpen ? <X /> : <Menu />}
           </button>
@@ -85,7 +91,7 @@ const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 

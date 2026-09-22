@@ -54,39 +54,79 @@ const projectData: Project[] = [
   }
 ];
 
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const projectCardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.96 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.75,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
 const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-24 relative z-10">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
             <h2 className="text-4xl md:text-6xl font-display font-bold leading-tight">
               Stuff I <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Built</span>
             </h2>
             <p className="text-gray-400 mt-2">Warning: May contain bugs 🐛</p>
-          </div>
-          <div className="hidden md:block">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="hidden md:block"
+          >
             <span className="text-sm font-mono text-gray-500">06 PROJECTS_FOUND</span>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectData.map((project, index) => (
+        {/* Orchestrated Staggered Cards Grid */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {projectData.map((project) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group glass-panel rounded-3xl overflow-hidden border border-white/5 hover:border-purple-500/30 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between"
+              variants={projectCardVariants}
+              whileHover={{ y: -8, scale: 1.015 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+              className="group glass-panel rounded-3xl overflow-hidden border border-white/5 hover:border-purple-500/40 hover:shadow-[0_20px_45px_-15px_rgba(176,38,255,0.25)] transition-colors duration-300 flex flex-col justify-between"
             >
-              {/* Image Container */}
+              {/* Image Container with Zoom */}
               <div className="relative h-48 overflow-hidden">
-                <div className="absolute inset-0 bg-purple-900/20 group-hover:bg-transparent transition-colors z-10"></div>
+                <div className="absolute inset-0 bg-purple-900/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
               </div>
 
@@ -101,24 +141,40 @@ const Projects: React.FC = () => {
                     ))}
                   </div>
 
-                  <h3 className="text-2xl font-bold mb-2 group-hover:text-purple-400 transition-colors">{project.title}</h3>
+                  <h3 className="text-2xl font-bold mb-2 group-hover:text-purple-400 transition-colors duration-300">{project.title}</h3>
                   <p className="text-gray-400 text-sm mb-6 leading-relaxed">
                     {project.description}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-4 mt-auto">
-                  <a href={project.link} target="_blank" rel="noreferrer" className="p-2 rounded-full bg-white text-black hover:bg-purple-400 hover:text-white transition-colors" title="View Source on GitHub">
+                  <motion.a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    whileHover={{ scale: 1.15, rotate: 6 }}
+                    whileTap={{ scale: 0.92 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    className="p-2 rounded-full bg-white text-black hover:bg-purple-400 hover:text-white transition-colors" 
+                    title="View Source on GitHub"
+                  >
                     <Github size={18} />
-                  </a>
-                  <a href={project.link} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-bold hover:text-purple-400 transition-colors">
+                  </motion.a>
+                  <motion.a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    whileHover={{ x: 4 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                    className="flex items-center gap-2 text-sm font-bold hover:text-purple-400 transition-colors"
+                  >
                     GitHub Repo <ExternalLink size={14} />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

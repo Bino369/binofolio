@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Photo } from '../types';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Camera } from 'lucide-react';
 
 const photos: Photo[] = [
@@ -15,40 +15,68 @@ const photos: Photo[] = [
 ];
 
 const Gallery: React.FC = () => {
+  const galleryRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: galleryRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const capturedParallaxX = useTransform(scrollYProgress, [0, 1], [-80, 80]);
+
   return (
-    <section id="gallery" className="py-24 relative">
-      {/* Decorative bg text */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden -z-10 opacity-[0.02] pointer-events-none">
-         <h2 className="text-[20vw] font-bold font-display leading-none text-center">CAPTURED</h2>
+    <section ref={galleryRef} id="gallery" className="py-24 relative overflow-hidden">
+      {/* Decorative bg text with subtle parallax movement */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden -z-10 opacity-[0.03] pointer-events-none select-none">
+        <motion.h2 
+          style={{ x: capturedParallaxX }}
+          className="text-[22vw] font-bold font-display leading-none whitespace-nowrap"
+        >
+          CAPTURED
+        </motion.h2>
       </div>
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 text-pink-400">
+          <motion.div 
+            initial={{ opacity: 0, y: -15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 text-pink-400"
+          >
             <Camera size={16} />
             <span className="text-sm font-bold tracking-wide uppercase">The Darkroom</span>
-          </div>
-          <h2 className="text-4xl font-display font-bold">Pixels & Memories 📸</h2>
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl font-display font-bold"
+          >
+            Pixels & Memories 📸
+          </motion.h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
           {photos.map((photo, i) => (
             <motion.div
               key={photo.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
+              initial={{ opacity: 0, scale: 0.94, y: 25 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.65, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.01 }}
               className={`relative group overflow-hidden rounded-2xl border border-white/5 ${photo.span}`}
             >
               <img 
                 src={photo.url} 
                 alt={photo.caption}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
               />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="font-display font-bold text-xl tracking-wider text-white border-b-2 border-pink-500 pb-1">
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span className="font-display font-bold text-xl tracking-wider text-white border-b-2 border-pink-500 pb-1 transform group-hover:translate-y-0 translate-y-2 transition-transform duration-300">
                   {photo.caption}
                 </span>
               </div>
@@ -56,15 +84,21 @@ const Gallery: React.FC = () => {
           ))}
         </div>
         
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12">
-            <a href="https://instagram.com/binooyyyyyy" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white underline underline-offset-4 decoration-purple-500 hover:decoration-2 transition-all">
-                See more on Insta →
-            </a>
-            <span className="hidden sm:inline text-gray-600">•</span>
-            <a href="https://unsplash.com/@binoy369" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white underline underline-offset-4 decoration-pink-500 hover:decoration-2 transition-all flex items-center gap-1 font-medium">
-                High-res shots on Unsplash 📸 →
-            </a>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12"
+        >
+          <a href="https://instagram.com/binooyyyyyy" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white underline underline-offset-4 decoration-purple-500 hover:decoration-2 transition-all">
+            See more on Insta →
+          </a>
+          <span className="hidden sm:inline text-gray-600">•</span>
+          <a href="https://unsplash.com/@binoy369" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white underline underline-offset-4 decoration-pink-500 hover:decoration-2 transition-all flex items-center gap-1 font-medium">
+            High-res shots on Unsplash 📸 →
+          </a>
+        </motion.div>
       </div>
     </section>
   );
